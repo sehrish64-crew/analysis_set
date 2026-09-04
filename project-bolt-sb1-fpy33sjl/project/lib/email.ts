@@ -19,7 +19,7 @@ function getTransporter() {
   const host = process.env.SMTP_HOST;
   const port = parseInt(process.env.SMTP_PORT || '587');
   const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const pass = process.env.SMTP_PASS?.replace(/\s+/g, '');
   const envSecure = process.env.SMTP_SECURE;
   const requireTLS = process.env.SMTP_REQUIRE_TLS === 'true';
 

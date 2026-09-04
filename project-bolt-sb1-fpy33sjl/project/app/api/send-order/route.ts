@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool from "@/lib/db";
+import { sendOrderEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,8 +25,19 @@ export async function POST(request: NextRequest) {
       connection.release();
     }
 
+    const emailSent = await sendOrderEmail(
+      clientName,
+      email,
+      phone,
+      vinPlate,
+      vehicleType,
+      plan,
+      Number(price)
+    );
+
     return NextResponse.json({
       success: true,
+      emailSent,
       message: "Order saved successfully.",
     });
   } catch (error) {

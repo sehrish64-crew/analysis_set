@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import pool from "@/lib/db";
+import { sendContactEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,8 +25,11 @@ export async function POST(request: NextRequest) {
       connection.release();
     }
 
+    const emailSent = await sendContactEmail(name, email, subject, message);
+
     return NextResponse.json({
       success: true,
+      emailSent,
       message: "Contact saved successfully.",
     });
   } catch (error) {
