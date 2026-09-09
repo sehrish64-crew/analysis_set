@@ -178,11 +178,16 @@ export async function sendOrderEmail(
         to: email,
         subject: 'Payment Pending - Vehicle Health Analysis',
         html: `
-          <h2>Order Confirmation</h2>
-          <p>Thank you for your order!</p>
-          <p><strong>Plan:</strong> ${plan}</p>
-          <p><strong>Price:</strong> £${price.toFixed(2)}</p>
-          <p>We will contact you shortly with more details.</p>
+          <h2>Payment Pending</h2>
+
+  <p>We have received your order details successfully.</p>
+
+  <p>However, your payment is currently pending. Once your payment is received and confirmed, you will receive an order confirmation with the next steps.</p>
+
+  <p>Thank you for your patience.</p>
+
+  <p><strong>Plan:</strong> ${plan}</p>
+  <p><strong>Price:</strong> £${price.toFixed(2)}</p>
         `,
       });
     }
